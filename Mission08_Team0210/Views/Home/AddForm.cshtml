@@ -1,0 +1,59 @@
+﻿@model Task
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <h2 class="mb-4 text-center">Add a New Task</h2>
+        ]
+        <form method="POST">
+
+            <!-- Task ID -->
+            <input type="hidden" asp-for="TaskId" />
+
+            <!-- Task Name -->
+            <div class="mb-3">
+                <label class="form-label" asp-for="Task">Task</label>
+                <input type="text" class="form-control" asp-for="Task">
+            </div>
+
+            <!-- Due Date -->
+            <div class="mb-3">
+                <label class="form-label" asp-for="DueDate">Due Date</label>
+                <input type="date" class="form-control" asp-for="DueDate">
+            </div>
+
+            <!-- Quadrant Dropdown -->
+            <div class="mb-3">
+                <label class="form-label" asp-for="Quadrant">Quadrant</label>
+                <select class="form-select" asp-for="Quadrant">
+                    <option value="">Select a quadrant</option>
+                    <option value="1">Quadrant I: Important / Urgent</option>
+                    <option value="2">Quadrant II: Important / Not Urgent</option>
+                    <option value="3">Quadrant III: Not Important / Urgent</option>
+                    <option value="4">Quadrant IV: Not Important / Not Urgent</option>
+                </select>
+            </div>
+
+            <!-- Category Dropdown -->
+            <div class="mb-3">
+                <label class="form-label" asp-for="CategoryId">Category</label>
+                <select class="form-select" asp-for="CategoryId">
+                    @foreach (Category category in ViewBag.Categories)
+                    {
+                        <option value="@category.CategoryId">@category.CategoryName</option>
+                    }
+                </select>
+            </div>
+
+            <!-- Completed Checkbox -->
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" asp-for="Completed">
+                <label class="form-check-label" asp-for="Completed">Completed</label>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Add Task</button>
+            </div>
+        </form>
+    </div>
+</div>
