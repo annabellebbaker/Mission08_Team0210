@@ -22,7 +22,7 @@ namespace Mission08_Team0210.Controllers
 
         [HttpPost]
 
-        public IActionResult Index() // 
+        public IActionResult Index() 
         {
             if (ModelState.IsValid)
             {
@@ -35,7 +35,7 @@ namespace Mission08_Team0210.Controllers
 
         public IActionResult AddTask()
         {
-            ViewBag.Categories = _context.Categories
+            ViewBag.Categories = _repo.Categories
                 .OrderBy(x => x.CategoryName)
                 .ToList();
 
@@ -47,7 +47,7 @@ namespace Mission08_Team0210.Controllers
         {
             if (ModelState.IsValid == false) // invalid input
             {
-                ViewBag.Categories = _context.Categories.ToList();
+                ViewBag.Categories = _repo.Categories.ToList();
                 return View(response);
             }
             else
