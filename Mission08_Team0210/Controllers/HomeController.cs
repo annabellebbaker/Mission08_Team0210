@@ -78,5 +78,21 @@ namespace Mission08_Team0210.Controllers
         }
 
 
+        [HttpPost]
+        public IActionResult Delete(Mission08_Team0210.Models.Task task)
+        {
+            
+            if (ModelState.IsValid)
+            {
+                _repo.RemoveTask(task);
+
+                return RedirectToAction("Index");
+
+            }
+            return RedirectToAction("Index");
+
+        }
     }
+
+
 }
