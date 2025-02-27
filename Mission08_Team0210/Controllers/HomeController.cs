@@ -31,6 +31,19 @@ namespace Mission08_Team0210.Controllers
             return View();
         }
 
-    
+        [HttpPost]
+        public IActionResult AddForm(Mission08_Team0210.Models.Task t)
+        {
+            if (ModelState.IsValid)
+            {
+                _repo.AddTask(t);
+
+            }
+
+            return View(new Mission08_Team0210.Models.Task());
+
+        }
+
+
     }
 }
