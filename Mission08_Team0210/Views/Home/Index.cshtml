@@ -1,8 +1,140 @@
-﻿@{
+﻿@model List<Mission08_Team0210.Models.Task>
+
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">My Tasks</h1>
 </div>
+
+
+<main class="container mt-4">
+    <div class="row">
+        <div class="col-md-1"></div> <!-- Empty space  -->
+        <div class="col-md-5 text-center"><h2>Urgent</h2></div>
+        <div class="col-md-5 text-center"><h2>Not Urgent</h2></div>
+        <div class="col-md-1"></div> <!-- Empty space -->
+    </div>
+
+    <div class="row">
+        <div class="col-md-1 d-flex align-items-center justify-content-center" style="background-color: #ffee8c;">
+            <!-- title -->
+            <h2 class="vertical-text">Important</h2>
+        </div>
+
+        <!-- Quadrant 1 -->
+        <div class="col-md-5 border border-dark p-3" style="background-color: #ffee8c;">
+            <h3 class="text-center">Quadrant 1 - Important / Urgent</h3>
+            <ul class="list-group">
+                @foreach (var task in Model.Where(t => t.Quadrant == 1))
+                {
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <input type="checkbox" onclick="markComplete(@task.TaskId)" />
+                            @task.TaskName
+                        </div>
+                        <div>
+                            <a asp-action="Edit" asp-route-id="@task.TaskId" class="btn btn-warning btn-sm">Edit</a>
+                            <form asp-action="Delete" asp-controller="Home" method="post" style="display:inline;">
+                                <input type="hidden" name="id" value="@task.TaskId" />
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');">Delete</button>
+                            </form>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+
+        <!-- Quadrant 2 -->
+        <div class="col-md-5 border border-dark p-3" style="background-color: #ffee8c;">
+            <h3 class="text-center">Quadrant 2 - Important / Not Urgent</h3>
+            <ul class="list-group">
+                @foreach (var task in Model.Where(t => t.Quadrant == 2))
+                {
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <input type="checkbox" onclick="markComplete(@task.TaskId)" />
+                            @task.TaskName
+                        </div>
+                        <div>
+                            <a asp-action="Edit" asp-route-id="@task.TaskId" class="btn btn-warning btn-sm">Edit</a>
+                            <form asp-action="Delete" asp-controller="Home" method="post" style="display:inline;">
+                                <input type="hidden" name="id" value="@task.TaskId" />
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');">Delete</button>
+                            </form>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+
+        <div class="col-md-1"></div> <!-- Empty space -->
+    </div>
+
+    <div class="row">
+        <div class="col-md-1 d-flex align-items-center justify-content-center" style="background-color: #ffee8c;">
+            <!-- title -->
+            <h2 class="vertical-text">Not Important</h2>
+        </div>
+
+        <!-- Quadrant 3 -->
+        <div class="col-md-5 border border-dark p-3" style="background-color: #ffee8c;">
+            <h3 class="text-center">Quadrant 3 - Not Important / Urgent</h3>
+            <ul class="list-group">
+                @foreach (var task in Model.Where(t => t.Quadrant == 3))
+                {
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <input type="checkbox" onclick="markComplete(@task.TaskId)"/>
+                            @task.TaskName
+                        </div>
+                        <div>
+                            <a asp-action="Edit" asp-route-id="@task.TaskId" class="btn btn-warning btn-sm">Edit</a>
+                            <form asp-action="Delete" asp-controller="Home" method="post" style="display:inline;">
+                                <input type="hidden" name="id" value="@task.TaskId"/>
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');">Delete</button>
+                            </form>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+
+        <!-- Quadrant 4 -->
+        <div class="col-md-5 border border-dark p-3" style="background-color: #ffee8c;">
+            <h3 class="text-center">Quadrant 4 - Not Important / Not Urgent</h3>
+            <ul class="list-group">
+                @foreach (var task in Model.Where(t => t.Quadrant == 4))
+                {
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <input type="checkbox" onclick="markComplete(@task.TaskId)"/>
+                            @task.TaskName
+                        </div>
+                        <div>
+                            <a asp-action="Edit" asp-route-id="@task.TaskId" class="btn btn-warning btn-sm">Edit</a>
+                            <form asp-action="Delete" asp-controller="Home" method="post" style="display:inline;">
+                                <input type="hidden" name="id" value="@task.TaskId"/>
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');">Delete</button>
+                            </form>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+
+        <div class="col-md-1"></div> <!-- Empty space -->
+    </div>
+</main>
+
+@section Scripts {
+    <script>
+        function markComplete(taskId) {
+            fetch(`/Home/MarkComplete/${taskId}`, { method: 'POST' })
+                .then(() => location.reload())
+                .catch(err => console.error(err));
+        }
+    </script>
+}
