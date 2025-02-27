@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Mission08_Team0210.Models;
 
 namespace Mission08_Team0210.Controllers
@@ -45,6 +46,19 @@ namespace Mission08_Team0210.Controllers
             }
 
             return View(new Mission08_Team0210.Models.Task());
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var recordToEdit = _repo.Tasks
+            .Where(x => x.TaskId == id)
+            .Single();
+
+            ViewBag.Categories = _repo.Categories
+                .OrderBy(x => x.CategoryName).ToList();
+            return View("AddForm", recordToEdit);
+
         }
 
 
