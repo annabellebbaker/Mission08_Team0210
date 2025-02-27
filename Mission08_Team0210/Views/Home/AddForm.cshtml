@@ -45,10 +45,9 @@
             </div>
 
             <!-- Completed Checkbox -->
-            <div class="mb-3 form-check">
-                <input class="form-check-input" asp-for="Completed">
-                <label class="form-check-label" asp-for="Completed">Completed</label>
-            </div>
+            <input type="hidden" name="Completed" value="false" />
+            <input type="checkbox" class="form-check-input" asp-for="Completed">
+            <label class="form-check-label" asp-for="Completed">Completed</label>
 
             <!-- Submit Button -->
             <div class="text-center">
