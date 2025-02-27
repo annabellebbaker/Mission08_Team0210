@@ -31,7 +31,6 @@ namespace Mission08_Team0210.Controllers
             return View();
         }
 
-        
-        
+    
     }
 }

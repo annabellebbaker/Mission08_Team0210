@@ -62,7 +62,7 @@ namespace Mission08_Team0210.Migrations
                     b.Property<int?>("CategoryId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool?>("Completed")
+                    b.Property<bool>("Completed")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER")
                         .HasDefaultValue(false);
