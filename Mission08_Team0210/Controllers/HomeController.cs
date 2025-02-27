@@ -22,7 +22,7 @@ namespace Mission08_Team0210.Controllers
 
         [HttpPost]
 
-        public IActionResult Index() // 
+        public IActionResult Index() 
         {
             if (ModelState.IsValid)
             {
@@ -35,7 +35,7 @@ namespace Mission08_Team0210.Controllers
 
         public IActionResult AddTask()
         {
-            ViewBag.Categories = _context.Categories
+            ViewBag.Categories = _repo.Categories
                 .OrderBy(x => x.CategoryName)
                 .ToList();
 
@@ -47,13 +47,13 @@ namespace Mission08_Team0210.Controllers
         {
             if (ModelState.IsValid == false) // invalid input
             {
-                ViewBag.Categories = _context.Categories.ToList();
+                ViewBag.Categories = _repo.Categories.ToList();
                 return View(response);
             }
             else
             {
-                _context.Tasks.Add(response);
-                _context.SaveChanges();
+                _repo.Tasks.Add(response);
+                _repo.SaveChanges();
                 return View("Confirmation", response);
             }
         }
@@ -62,9 +62,9 @@ namespace Mission08_Team0210.Controllers
         // this is going to be a reference to the database and CRUD functionality
         public IActionResult Edit(int id)
         {
-            var recordToEdit = _context.Tasks.Find(id);
+            var recordToEdit = _repo.Tasks.Find(id);
 
-            ViewBag.Categories = _context.Categories
+            ViewBag.Categories = _repo.Categories
                 .ToList();
 
             return View("AddTask", recordToEdit);
@@ -76,14 +76,14 @@ namespace Mission08_Team0210.Controllers
         {
             if (ModelState.IsValid == true)
             {
-                _context.Tasks.Update(updatedInfo);
-                _context.SaveChanges();
+                _repo.Tasks.Update(updatedInfo);
+                _repo.SaveChanges();
 
                 return RedirectToAction("Index");
             }
 
             // Re-populate categories if form validation fails
-            ViewBag.Categories = _context.Categories.ToList();
+            ViewBag.Categories = _repo.Categories.ToList();
             return View("Index", updatedInfo);
         }
 
@@ -95,10 +95,12 @@ namespace Mission08_Team0210.Controllers
 
             if (taskToDelete != null)
             {
-                _context.Tasks.Remove(taskToDelete); // Remove the movie
-                _context.SaveChanges(); // Save changes to the database
+                _repo.Tasks.Remove(taskToDelete); // Remove the movie
+                _repo.SaveChanges(); // Save changes to the database
             }
 
             return RedirectToAction("Index"); // Redirect back to the index page
 
         }
+    }
+}
