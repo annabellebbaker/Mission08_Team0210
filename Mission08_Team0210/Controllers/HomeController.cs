@@ -77,20 +77,23 @@ namespace Mission08_Team0210.Controllers
 
         }
 
-
         [HttpPost]
-        public IActionResult Delete(Mission08_Team0210.Models.Task task)
+        public IActionResult Delete(int id)
         {
-            
-            if (ModelState.IsValid)
+            if (id == 0)
             {
-                _repo.RemoveTask(task);
-
-                return RedirectToAction("Index");
-
+                return RedirectToAction("Index"); // or handle invalid id case
             }
-            return RedirectToAction("Index");
 
+            var DeleteTask = _repo.Tasks
+                .Where(x => x.TaskId == id).Single(); // You would need to implement this method in your repository to get the task by id.
+
+            if (DeleteTask != null)
+            {
+                _repo.RemoveTask(DeleteTask); // Assuming this removes the task from your data source.
+            }
+
+            return RedirectToAction("Index");
         }
     }
 
