@@ -28,20 +28,23 @@ namespace Mission08_Team0210.Controllers
         {
             ViewBag.Categories = _repo.Categories.ToList();
 
-            return View();
+            return View(new Mission08_Team0210.Models.Task());
         }
 
         [HttpPost]
         public IActionResult AddForm(Mission08_Team0210.Models.Task t)
         {
+
+            ViewBag.Categories = _repo.Categories.ToList();
             if (ModelState.IsValid)
             {
                 _repo.AddTask(t);
+                
+                return View("Confirmation");
 
             }
 
             return View(new Mission08_Team0210.Models.Task());
-
         }
 
 
