@@ -35,7 +35,7 @@ namespace Mission08_Team0210.Migrations
                     DueDate = table.Column<string>(type: "TEXT", nullable: true),
                     Quadrant = table.Column<int>(type: "INTEGER", nullable: false),
                     CategoryId = table.Column<int>(type: "INTEGER", nullable: true),
-                    Completed = table.Column<bool>(type: "INTEGER", nullable: true, defaultValue: false)
+                    Completed = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false)
                 },
                 constraints: table =>
                 {
