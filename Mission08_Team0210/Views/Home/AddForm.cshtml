@@ -1,19 +1,19 @@
-﻿@model Task
+﻿@model Mission08_Team0210.Models.Task
 
 <div class="row">
     <div class="col-md-8 offset-md-2">
         <h2 class="mb-4 text-center">Add a New Task</h2>
-        ]
+        
         <form method="POST">
 
             <!-- Task ID -->
             <input type="hidden" asp-for="TaskId" />
 
             <!-- Task Name -->
-            <div class="mb-3">
+           <!-- <div class="mb-3">
                 <label class="form-label" asp-for="TaskName">Task</label>
                 <input type="text" class="form-control" asp-for="TaskName">
-            </div>
+             </div>-->
 
             <!-- Due Date -->
             <div class="mb-3">
@@ -56,7 +56,7 @@
             </div>
 
             <!-- Error handling -->
-            <div asp-validation-summary=”All”></div>
+            <div asp-validation-summary="All"></div>
         </form>
     </div>
 </div>
