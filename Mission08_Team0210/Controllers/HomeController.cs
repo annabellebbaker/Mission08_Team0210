@@ -22,7 +22,7 @@ namespace Mission08_Team0210.Controllers
 
         [HttpPost]
 
-        public IActionResult Index() 
+        public IActionResult Index(Task t) 
         {
             if (ModelState.IsValid)
             {
@@ -33,17 +33,18 @@ namespace Mission08_Team0210.Controllers
 
         }
 
-        public IActionResult AddTask()
+
+        public IActionResult AddForm()
         {
             ViewBag.Categories = _repo.Categories
                 .OrderBy(x => x.CategoryName)
                 .ToList();
 
-            return View(new Task());
+            return View();
         }
 
         [HttpPost]
-        public IActionResult AddTask(Task response)
+        public IActionResult AddForm(Task response)
         {
             if (ModelState.IsValid == false) // invalid input
             {
@@ -52,9 +53,8 @@ namespace Mission08_Team0210.Controllers
             }
             else
             {
-                _repo.Tasks.Add(response);
-                _repo.SaveChanges();
-                return View("Confirmation", response);
+                _repo.AddTask(response);
+                return View("Confirmation", response); // sending to the Confirmation view
             }
         }
 
@@ -67,7 +67,7 @@ namespace Mission08_Team0210.Controllers
             ViewBag.Categories = _repo.Categories
                 .ToList();
 
-            return View("AddTask", recordToEdit);
+            return View("AddForm", recordToEdit);
         }
 
 
@@ -76,8 +76,7 @@ namespace Mission08_Team0210.Controllers
         {
             if (ModelState.IsValid == true)
             {
-                _repo.Tasks.Update(updatedInfo);
-                _repo.SaveChanges();
+                _repo.UpdateTask(updatedInfo);
 
                 return RedirectToAction("Index");
             }
@@ -89,14 +88,14 @@ namespace Mission08_Team0210.Controllers
 
         // Delete (POST) - Handle the delete action directly from the index page
         [HttpPost]
-        public IActionResult Delete(int id)
+        public IActionResult RemoveTask(int id)
         {
             //var taskToDelete = _context.Tasks.SingleOrDefault(x => x.TaskId == id);
 
             if (taskToDelete != null)
             {
-                _repo.Tasks.Remove(taskToDelete); // Remove the movie
-                _repo.SaveChanges(); // Save changes to the database
+                _repo.RemoveTask(taskToDelete); // Remove the movie
+            // Save changes to the database
             }
 
             return RedirectToAction("Index"); // Redirect back to the index page
