@@ -61,6 +61,22 @@ namespace Mission08_Team0210.Controllers
 
         }
 
+        [HttpPost]
+        public IActionResult Edit(Mission08_Team0210.Models.Task updatedTask)
+        {
+
+            ViewBag.Categories = _repo.Categories.ToList();
+            if (ModelState.IsValid)
+            {
+                _repo.UpdateTask(updatedTask);
+
+                return View("Confirmation");
+
+            }
+            return RedirectToAction("Index");
+
+        }
+
 
     }
 }
