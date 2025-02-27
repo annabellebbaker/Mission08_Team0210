@@ -22,6 +22,11 @@ namespace Mission08_Team0210.Models
                 new Category { CategoryId = 4, CategoryName = "Church" }
 
                 );
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Task>()
+                .Property(t => t.Completed)
+                .HasDefaultValue(false); // Set default value in the database
         }
 
 

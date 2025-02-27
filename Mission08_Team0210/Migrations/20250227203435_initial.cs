@@ -31,10 +31,11 @@ namespace Mission08_Team0210.Migrations
                 {
                     TaskId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    TaskName = table.Column<string>(type: "TEXT", nullable: false),
                     DueDate = table.Column<string>(type: "TEXT", nullable: true),
                     Quadrant = table.Column<int>(type: "INTEGER", nullable: false),
                     CategoryId = table.Column<int>(type: "INTEGER", nullable: true),
-                    Completed = table.Column<bool>(type: "INTEGER", nullable: true)
+                    Completed = table.Column<bool>(type: "INTEGER", nullable: true, defaultValue: false)
                 },
                 constraints: table =>
                 {

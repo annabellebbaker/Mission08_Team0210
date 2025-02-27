@@ -9,7 +9,7 @@ namespace Mission08_Team0210.Models
         [Required]
         public int TaskId { get; set; }// getter and setter applied
         [Required]
-        public string TaskName { get; set; }
+        public string TaskName { get; set; }   
         public string? DueDate { get; set; }
         [Required]
         public int Quadrant { get; set; }
@@ -19,7 +19,8 @@ namespace Mission08_Team0210.Models
         public Category Category { get; set; }
         public bool? Completed { get; set; }
 
-       
+     
+
 
     }
 }

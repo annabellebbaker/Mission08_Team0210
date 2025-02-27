@@ -10,7 +10,7 @@ using Mission08_Team0210.Models;
 namespace Mission08_Team0210.Migrations
 {
     [DbContext(typeof(TaskContext))]
-    [Migration("20250226231112_initial")]
+    [Migration("20250227203435_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -66,13 +66,19 @@ namespace Mission08_Team0210.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<bool?>("Completed")
-                        .HasColumnType("INTEGER");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("DueDate")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Quadrant")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("TaskName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.HasKey("TaskId");
 
