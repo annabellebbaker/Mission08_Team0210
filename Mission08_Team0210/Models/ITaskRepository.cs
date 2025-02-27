@@ -2,6 +2,7 @@
 {
     public interface ITaskRepository 
     {
-        List
+        List<Category>Categories { get; }
+        List<Task> Tasks { get; }
     }
 }
