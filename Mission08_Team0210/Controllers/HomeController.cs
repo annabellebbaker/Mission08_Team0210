@@ -21,7 +21,7 @@ namespace Mission08_Team0210.Controllers
             var taskList = _repo.Tasks.Where(X => X.Completed == false).ToList();
 
             return View(taskList);
-          
+
         }
 
         [HttpGet]
@@ -40,7 +40,7 @@ namespace Mission08_Team0210.Controllers
             if (ModelState.IsValid)
             {
                 _repo.AddTask(t);
-                
+
                 return View("Confirmation");
 
             }
@@ -81,7 +81,7 @@ namespace Mission08_Team0210.Controllers
         [HttpPost]
         public IActionResult Delete(Mission08_Team0210.Models.Task task)
         {
-            
+
             if (ModelState.IsValid)
             {
                 _repo.RemoveTask(task);
@@ -93,20 +93,21 @@ namespace Mission08_Team0210.Controllers
 
         }
 
-        
+
         [HttpPost]
-        public IActionResult MarkComplete([FromBody] Mission08_Team0210.Models.Task updatedTask)
+        public IActionResult MarkComplete(int id)
         {
-            var task = _repo.Tasks.FirstOrDefault(t => t.TaskId == updatedTask.TaskId);
+            var task = _repo.Tasks.FirstOrDefault(t => t.TaskId == id);
             if (task != null)
             {
-                task.Completed = updatedTask.Completed;
-                _repo.UpdateTask(task);
-                return Ok();
+                // Mark the task as completed
+                task.Completed = true;  // or task.Completed = !task.Completed; if toggling
+                _repo.UpdateTask(task); // Update the task in the repository
+                return RedirectToAction("Index"); // Redirect to the index page (or wherever)
             }
-            return NotFound();
+            return NotFound(); // If the task is not found
         }
+
+
     }
-
-
 }
