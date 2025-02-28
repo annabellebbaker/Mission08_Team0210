@@ -32,7 +32,13 @@
                 {
                     <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #fff8ba;">
                         <div>
-                            <input type="checkbox" onchange="MarkComplete(@task.TaskId, this.checked)" @(task.Completed ? "checked" : "") />
+                            <form asp-action="MarkComplete" asp-controller="Home" asp-route-id="@task.TaskId" method="post" style="display:inline; padding-right: 10px;">
+                                <input type="hidden" name="id" value="@task.TaskId" />
+                                <button type="submit" class="btn btn-danger btn-sm" style="background-color: #5e975a; border-color: #324930; color: white;">
+                                    Complete
+                                </button>
+
+                            </form>
                             @task.TaskName
                         </div>
                         <div>
@@ -58,7 +64,13 @@
                 {
                     <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #fff8ba;">
                         <div>
-                            <input type="checkbox" onchange="MarkComplete(@task.TaskId, this.checked)" @(task.Completed ? "checked" : "") />
+                            <form asp-action="MarkComplete" asp-controller="Home" asp-route-id="@task.TaskId" method="post" style="display:inline; padding-right: 10px;">
+                                <input type="hidden" name="id" value="@task.TaskId" />
+                                <button type="submit" class="btn btn-danger btn-sm" style="background-color: #5e975a; border-color: #324930; color: white;">
+                                    Complete
+                                </button>
+
+                            </form>
                             @task.TaskName
                         </div>
                         <div>
@@ -93,7 +105,13 @@
                 {
                     <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #fff8ba;">
                         <div>
-                            <input type="checkbox" onchange="MarkComplete(@task.TaskId, this.checked)" @(task.Completed ? "checked" : "") />
+                            <form asp-action="MarkComplete" asp-controller="Home" asp-route-id="@task.TaskId" method="post" style="display:inline; padding-right: 10px;">
+                                <input type="hidden" name="id" value="@task.TaskId" />
+                                <button type="submit" class="btn btn-danger btn-sm" style="background-color: #5e975a; border-color: #324930; color: white;">
+                                    Complete
+                                </button>
+
+                            </form>
                             @task.TaskName
                         </div>
                         <div>
@@ -119,7 +137,13 @@
                 {
                     <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #fff8ba;">
                         <div>
-                            <input type="checkbox" onchange="MarkComplete(@task.TaskId, this.checked)" @(task.Completed ? "checked" : "") />
+                            <form asp-action="MarkComplete" asp-controller="Home" asp-route-id="@task.TaskId" method="post" style="display:inline; padding-right: 10px;">
+                                <input type="hidden" name="id" value="@task.TaskId" />
+                                <button type="submit" class="btn btn-danger btn-sm" style="background-color: #5e975a; border-color: #324930; color: white;">
+                                    Complete
+                                </button>
+
+                            </form>
                             @task.TaskName
                         </div>
                         <div>
@@ -141,15 +165,4 @@
     </div>
 </main>
 
-@section Scripts {
-    <script>
-        function MarkComplete(taskId, isChecked) {
-            fetch('/Home/MarkComplete', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ id: taskId, completed: isChecked })
-            }).then(() => location.reload())
-                .catch(err => console.error(err));
-        }
-    </script>
-}
+
