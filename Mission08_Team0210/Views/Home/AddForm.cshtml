@@ -45,13 +45,14 @@
             </div>
 
             <!-- Completed Checkbox -->
-            <input type="hidden" name="Completed" value="false" />
-            <input type="checkbox" class="form-check-input" asp-for="Completed">
-            <label class="form-check-label" asp-for="Completed">Completed</label>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" asp-for="Completed">
+                <label class="form-check-label" asp-for="Completed">Completed</label>
+            </div>
 
             <!-- Submit Button -->
             <div class="text-center">
-                <button type="submit" class="btn btn-primary">Add Task</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </div>
 
             <!-- Error handling -->
