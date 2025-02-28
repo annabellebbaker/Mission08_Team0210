@@ -79,19 +79,19 @@ namespace Mission08_Team0210.Controllers
 
 
         [HttpPost]
-        public IActionResult Delete(Mission08_Team0210.Models.Task task)
+        public IActionResult Delete(int id)
         {
+            var task = _repo.Tasks.FirstOrDefault(t => t.TaskId == id);
 
-            if (ModelState.IsValid)
+            if (task != null)
             {
                 _repo.RemoveTask(task);
-
                 return RedirectToAction("Index");
-
             }
-            return RedirectToAction("Index");
 
+            return NotFound();  // In case the task wasn't found
         }
+
 
 
         [HttpPost]
