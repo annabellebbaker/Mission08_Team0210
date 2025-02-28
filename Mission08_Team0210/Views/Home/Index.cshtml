@@ -32,13 +32,13 @@
                 {
                     <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #fff8ba;">
                         <div>
-                            <input type="checkbox" onclick="markComplete(@task.TaskId)" />
+                            <input type="checkbox" onchange="MarkComplete(@task.TaskId, this.checked)" @(task.Completed ? "checked" : "") />
                             @task.TaskName
                         </div>
                         <div>
                             <a asp-action="Edit" asp-route-id="@task.TaskId" class="btn btn-warning btn-sm"
                                style="background-color: #5c9fe2; border-color: #3482d3; color: white;"
-                               >Edit</a>
+                            >Edit</a>
                             <form asp-action="Delete" asp-controller="Home" asp-route-id="@task.TaskId" method="post" style="display:inline;">
                                 <input type="hidden" name="id" value="@task.TaskId" />
                                 <button type="submit" class="btn btn-danger btn-sm" style="background-color: #3482d3; border-color: #124578; color: white;"
@@ -58,7 +58,7 @@
                 {
                     <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #fff8ba;">
                         <div>
-                            <input type="checkbox" onclick="markComplete(@task.TaskId)" />
+                            <input type="checkbox" onchange="MarkComplete(@task.TaskId, this.checked)" @(task.Completed ? "checked" : "") />
                             @task.TaskName
                         </div>
                         <div>
@@ -93,7 +93,7 @@
                 {
                     <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #fff8ba;">
                         <div>
-                            <input type="checkbox" onclick="markComplete(@task.TaskId)" />
+                            <input type="checkbox" onchange="MarkComplete(@task.TaskId, this.checked)" @(task.Completed ? "checked" : "") />
                             @task.TaskName
                         </div>
                         <div>
@@ -119,7 +119,7 @@
                 {
                     <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #fff8ba;">
                         <div>
-                            <input type="checkbox" onclick="markComplete(@task.TaskId)" />
+                            <input type="checkbox" onchange="MarkComplete(@task.TaskId, this.checked)" @(task.Completed ? "checked" : "") />
                             @task.TaskName
                         </div>
                         <div>
@@ -143,9 +143,12 @@
 
 @section Scripts {
     <script>
-        function markComplete(taskId) {
-            fetch(`/Home/MarkComplete/${taskId}`, { method: 'POST' })
-                .then(() => location.reload())
+        function MarkComplete(taskId, isChecked) {
+            fetch('/Home/MarkComplete', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: taskId, completed: isChecked })
+            }).then(() => location.reload())
                 .catch(err => console.error(err));
         }
     </script>

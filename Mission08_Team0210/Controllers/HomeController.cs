@@ -92,6 +92,20 @@ namespace Mission08_Team0210.Controllers
             return RedirectToAction("Index");
 
         }
+
+        
+        [HttpPost]
+        public IActionResult MarkComplete([FromBody] Mission08_Team0210.Models.Task updatedTask)
+        {
+            var task = _repo.Tasks.FirstOrDefault(t => t.TaskId == updatedTask.TaskId);
+            if (task != null)
+            {
+                task.Completed = updatedTask.Completed;
+                _repo.UpdateTask(task);
+                return Ok();
+            }
+            return NotFound();
+        }
     }
 
 
